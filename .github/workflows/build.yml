@@ -20,5 +20,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: gd-pathfinder
           path: ${{ steps.build.outputs.build-output }}
+          archive: false
