@@ -1,0 +1,24 @@
+name: Build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build mod
+        uses: geode-sdk/build-geode-mod@main
+        id: build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: gd-pathfinder
+          path: ${{ steps.build.outputs.build-output }}
