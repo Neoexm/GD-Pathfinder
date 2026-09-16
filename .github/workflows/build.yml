@@ -35,10 +35,10 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
-          name: gd-pathfinder.geode
+          name: maimaidxer.gdpathfinder.geode
 
       - name: Publish release
         uses: softprops/action-gh-release@v3
         with:
-          files: gd-pathfinder.geode
+          files: maimaidxer.gdpathfinder.geode
           fail_on_unmatched_files: true
