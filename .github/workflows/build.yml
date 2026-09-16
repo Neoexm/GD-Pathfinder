@@ -3,6 +3,7 @@ name: Build
 on:
   push:
     branches: ["main"]
+    tags: ["v*"]
   pull_request:
   workflow_dispatch:
 
@@ -22,3 +23,21 @@ jobs:
         with:
           path: ${{ steps.build.outputs.build-output }}
           archive: false
+
+  release:
+    name: Release
+    needs: build
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          path: out
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: out/**/*.geode
