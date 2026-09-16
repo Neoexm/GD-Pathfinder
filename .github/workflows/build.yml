@@ -33,11 +33,12 @@ jobs:
       contents: write
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
-          path: out
+          name: gd-pathfinder.geode
 
       - name: Publish release
         uses: softprops/action-gh-release@v3
         with:
-          files: out/**/*.geode
+          files: gd-pathfinder.geode
+          fail_on_unmatched_files: true
