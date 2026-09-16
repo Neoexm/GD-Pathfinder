@@ -1,0 +1,84 @@
+{
+    "geode": "5.10.1",
+    "gd": {
+        "win": "2.2081"
+    },
+    "id": "gd-pathfinder",
+    "name": "GD Pathfinder",
+    "version": "v1.0.0-beta.1",
+    "developer": "maimaidxer",
+    "description": "Finds the inputs to beat a level, then plays them.",
+    "dependencies": {
+        "geode.node-ids": ">=v1.23.3"
+    },
+    "settings": {
+        "time-limit": {
+            "name": "Search time limit",
+            "description": "Seconds the search may run before giving up.",
+            "type": "int",
+            "default": 600,
+            "min": 30,
+            "max": 3600
+        },
+        "lean-search": {
+            "name": "Search on a copy without decoration",
+            "description": "Search big levels on a copy with only the gameplay objects, then verify and play the path on the real level. Other mods' gameplay hooks are turned off while the copy is searched.",
+            "type": "bool",
+            "default": false
+        },
+        "fast-restore": {
+            "name": "Fast state restore (experimental)",
+            "description": "Only reset the objects triggers can move when going back to a searched state. Much faster on decorated levels, but can desync on levels with lots of moving objects.",
+            "type": "bool",
+            "default": false
+        },
+        "segment-seconds": {
+            "name": "Segment length (seconds)",
+            "description": "The level is solved this many seconds at a time, each segment continuing from the previous one. 0 solves the whole level in one search.",
+            "type": "int",
+            "default": 8,
+            "min": 0,
+            "max": 120
+        },
+        "resume-saved": {
+            "name": "Continue from saved progress",
+            "description": "When a level has a saved partial path, carry on from the furthest verified point instead of solving from the start. Untick to force a fresh search.",
+            "type": "bool",
+            "default": true
+        },
+        "show-search": {
+            "name": "Show the level while searching",
+            "description": "Keep rendering the level while the bot searches. Off hides it, which roughly doubles the search speed.",
+            "type": "bool",
+            "default": true
+        },
+        "use-cache": {
+            "name": "Use cached paths",
+            "description": "Play a previously found path for the same level instead of searching again.",
+            "type": "bool",
+            "default": true
+        },
+        "memory-limit": {
+            "name": "Search memory (MB)",
+            "description": "How much the game process may grow while searching before the search starts dropping states. Capped automatically to the memory the machine actually has free, so a big number here is a ceiling, not a reservation.",
+            "type": "int",
+            "default": 2000,
+            "min": 200,
+            "max": 6000
+        },
+        "look-ahead-seconds": {
+            "name": "Look-ahead (seconds)",
+            "description": "How far the bot checks ahead before it decides a press will kill it, in seconds. 0 lets it pick automatically (about 0.02-0.03s). Higher catches deaths earlier but costs search speed. Only affects ship, UFO, wave and spider sections.",
+            "type": "float",
+            "default": 0.0,
+            "min": 0.0,
+            "max": 2.0
+        },
+        "refuse-fatal-clicks": {
+            "name": "Refuse clicks it thinks will kill it",
+            "description": "Stops the bot from even trying a press its look-ahead predicts is fatal, instead of trying it last. WARNING: the prediction is approximate, so when it is wrong the bot throws away the only route through a section and can get permanently stuck. Leave off unless testing.",
+            "type": "bool",
+            "default": false
+        }
+    }
+}
